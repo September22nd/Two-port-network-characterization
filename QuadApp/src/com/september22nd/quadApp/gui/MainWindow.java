@@ -78,10 +78,12 @@ public class MainWindow extends JFrame {
 	
 	private void putInfoDialog() {
 		String str1 = "Autor: @september22nd en enero de 2024.";
+		String str5 = "Versión 2024w04a.";
 		String str2 = "Cualquier sugerencia, reporte de error o insulto, al Discord @september22nd";
 		String str3 = "Open source, cualquiera puede colaborar.";
 		String str4 = "Repositorio: https://github.com/September22nd";
 		JLabel label1 = new JLabel(str1);
+		JLabel label5 = new JLabel(str5);
 		JLabel label2 = new JLabel(str2);
 		JLabel label3 = new JLabel(str3);
 		JLabel label4 = new JLabel(str4);
@@ -92,6 +94,7 @@ public class MainWindow extends JFrame {
 		infoDialog.setResizable(false);
 		infoDialog.setLayout(new GridLayout(0, 1));
 		infoDialog.add(label1);
+		infoDialog.add(label5);
 		infoDialog.add(label2);
 		infoDialog.add(label3);
 		infoDialog.add(label4);
