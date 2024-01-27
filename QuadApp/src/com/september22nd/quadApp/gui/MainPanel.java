@@ -250,13 +250,8 @@ public class MainPanel extends JPanel {
 		table.setDefaultEditor(Object.class, null);
 	}
 	
-	private void addQuadToTable() {
-		Matrix ma = new Matrix(
-			Double.parseDouble(inputField11.getText()),
-			Double.parseDouble(inputField12.getText()),
-			Double.parseDouble(inputField21.getText()),
-			Double.parseDouble(inputField22.getText())
-		);
+	private void addQuadToTable() throws NumberFormatException {
+		Matrix ma = readInputs();
 		quad = new Quad(ma, paramTypeSelected);
 		quadList.add(quad);
 		
@@ -270,48 +265,48 @@ public class MainPanel extends JPanel {
 			
 			String[] zStr = new String[2];
 			try {
-				zStr[0] = String.format("%.2f %.2f", _z.get11(), _z.get12());
-				zStr[1] = String.format("%.2f %.2f", _z.get21(), _z.get22());
+				zStr[0] = String.format("%.3f %.3f", _z.get11(), _z.get12());
+				zStr[1] = String.format("%.3f %.3f", _z.get21(), _z.get22());
 			} catch (NullPointerException e) {
 				zStr[0] = "DNE";
 				zStr[1] = "";
 			}
 			String[] yStr = new String[2];
 			try {
-				yStr[0] = String.format("%.2f %.2f", _y.get11(), _y.get12());
-				yStr[1] = String.format("%.2f %.2f", _y.get21(), _y.get22());
+				yStr[0] = String.format("%.3f %.3f", _y.get11(), _y.get12());
+				yStr[1] = String.format("%.3f %.3f", _y.get21(), _y.get22());
 			} catch (NullPointerException e) {
 				yStr[0] = "DNE";
 				yStr[1] = "";
 			}
 			String[] hStr = new String[2];
 			try {
-				hStr[0] = String.format("%.2f %.2f", _h.get11(), _h.get12());
-				hStr[1] = String.format("%.2f %.2f", _h.get21(), _h.get22());
+				hStr[0] = String.format("%.3f %.3f", _h.get11(), _h.get12());
+				hStr[1] = String.format("%.3f %.3f", _h.get21(), _h.get22());
 			} catch (NullPointerException e) {
 				hStr[0] = "DNE";
 				hStr[1] = "";
 			}
 			String[] gStr = new String[2];
 			try {
-				gStr[0] = String.format("%.2f %.2f", _g.get11(), _g.get12());
-				gStr[1] = String.format("%.2f %.2f", _g.get21(), _g.get22());
+				gStr[0] = String.format("%.3f %.3f", _g.get11(), _g.get12());
+				gStr[1] = String.format("%.3f %.3f", _g.get21(), _g.get22());
 			} catch (NullPointerException e) {
 				gStr[0] = "DNE";
 				gStr[1] = "";
 			}
 			String[] tStr = new String[2];
 			try {
-				tStr[0] = String.format("%.2f %.2f", _t.get11(), _t.get12());
-				tStr[1] = String.format("%.2f %.2f", _t.get21(), _t.get22());
+				tStr[0] = String.format("%.3f %.3f", _t.get11(), _t.get12());
+				tStr[1] = String.format("%.3f %.3f", _t.get21(), _t.get22());
 			} catch (NullPointerException e) {
 				tStr[0] = "DNE";
 				tStr[1] = "";
 			}
 			String[] itStr = new String[2];
 			try {
-				itStr[0] = String.format("%.2f %.2f", _it.get11(), _it.get12());
-				itStr[1] = String.format("%.2f %.2f", _it.get21(), _it.get22());
+				itStr[0] = String.format("%.3f %.3f", _it.get11(), _it.get12());
+				itStr[1] = String.format("%.3f %.3f", _it.get21(), _it.get22());
 			} catch (NullPointerException e) {
 				itStr[0] = "DNE";
 				itStr[1] = "";
@@ -332,6 +327,39 @@ public class MainPanel extends JPanel {
 		}
 	}
 	
+	private Matrix readInputs() throws NumberFormatException {
+		return new Matrix(
+				readInputField(inputField11),
+				readInputField(inputField12),
+				readInputField(inputField21),
+				readInputField(inputField22)
+				);
+	}
+	
+	private Double readInputField(JTextField inputField) {
+		try {
+			return Double.parseDouble(inputField.getText());
+		}
+		catch (NumberFormatException e) {
+			switch(inputField.getText().charAt(inputField.getText().length() - 1)) {
+			case 'p': //pico
+				return Double.parseDouble(inputField.getText().substring(0, inputField.getText().length() - 1)) * 0.000000000001;
+			case 'n': //nano
+				return Double.parseDouble(inputField.getText().substring(0, inputField.getText().length() - 1)) * 0.000000001;
+			case 'u': //micro
+				return Double.parseDouble(inputField.getText().substring(0, inputField.getText().length() - 1)) * 0.000001;
+			case 'm': //mili
+				return Double.parseDouble(inputField.getText().substring(0, inputField.getText().length() - 1)) * 0.001;
+			case 'k': //kilo
+				return Double.parseDouble(inputField.getText().substring(0, inputField.getText().length() - 1)) * 1000.0;
+			case 'M': //mega
+				return Double.parseDouble(inputField.getText().substring(0, inputField.getText().length() - 1)) * 1000000.0;
+			default:
+				throw new NumberFormatException();
+			}
+		}
+	}
+
 	private void cleanInputFields() {
 		inputField11.setText("");
 		inputField12.setText("");
