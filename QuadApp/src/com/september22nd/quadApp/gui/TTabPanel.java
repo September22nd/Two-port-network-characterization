@@ -3,7 +3,9 @@ package com.september22nd.quadApp.gui;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-import com.september22nd.quadApp.quadLogic.Quad;
+import com.september22nd.quadApp.quadLogic.CQuad;
+import com.september22nd.quadApp.quadLogic.Complex;
+import com.september22nd.quadApp.quadLogic.DisplayForm;
 
 public class TTabPanel extends AbstractParameterDetailPanel {
 
@@ -12,7 +14,7 @@ public class TTabPanel extends AbstractParameterDetailPanel {
 	 */
 	private static final long serialVersionUID = -1538304320408447274L;
 	
-	public TTabPanel(Quad quad) {
+	public TTabPanel(CQuad quad) {
 		super();
 		addTextToLabels();
 		this.quad = quad;
@@ -31,11 +33,11 @@ public class TTabPanel extends AbstractParameterDetailPanel {
 				"Ms",
 		};
 		String[] comboOptionsNumb = {
-				"*10^(-6)",
-				"*10^(-3)",
-				"*10^(0)",
-				"*10^3",
-				"*10^6",
+				"E-6",
+				"E-3",
+				"E0",
+				"E3",
+				"E6",
 		};
 		comboOptions11 = comboOptionsNumb;
 		comboOptions12 = comboOptionsResist;
@@ -43,10 +45,22 @@ public class TTabPanel extends AbstractParameterDetailPanel {
 		comboOptions22 = comboOptionsNumb;
 		addAllCombos();
 		try {
-			value11.setText(String.format("%f", this.quad.getTransParams().get11()));
-			value12.setText(String.format("%f", this.quad.getTransParams().get12()));
-			value21.setText(String.format("%f", this.quad.getTransParams().get21()));
-			value22.setText(String.format("%f", this.quad.getTransParams().get22()));
+			String s11 = (displayForm == DisplayForm.RECT) ?
+					String.format("%s", this.quad.getTransParams().get(0, 0).toRectString()):
+					String.format("%s", this.quad.getTransParams().get(0, 0).toPolarString(angUnit));
+			String s12 = (displayForm == DisplayForm.RECT) ?
+					String.format("%s", this.quad.getTransParams().get(0, 1).toRectString()):
+					String.format("%s", this.quad.getTransParams().get(0, 1).toPolarString(angUnit));
+			String s21 = (displayForm == DisplayForm.RECT) ?
+					String.format("%s", this.quad.getTransParams().get(1, 0).toRectString()):
+					String.format("%s", this.quad.getTransParams().get(1, 0).toPolarString(angUnit));
+			String s22 = (displayForm == DisplayForm.RECT) ?
+					String.format("%s", this.quad.getTransParams().get(1, 1).toRectString()):
+					String.format("%s", this.quad.getTransParams().get(1, 1).toPolarString(angUnit));
+			value11.setText(s11);
+			value12.setText(s12);
+			value21.setText(s21);
+			value22.setText(s22);
 		}
 		catch (NullPointerException e) {
 			value11.setVisible(false);
@@ -62,22 +76,40 @@ public class TTabPanel extends AbstractParameterDetailPanel {
 	@Override
 	protected void updateUnits(JComboBox<String> comboBox, JTextField textField, int i, int j) {
 		if (!isDNE) {
+			Complex factor;
+			String s = "";
 			switch(comboBox.getSelectedIndex()) {
 			case 4:
-				textField.setText(String.format("%f", this.quad.getTransParams().get(i, j) * 0.000001));
+				factor = new Complex(0.000001, 0.0);
+				s = (displayForm == DisplayForm.RECT) ?
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toRectString()):
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toPolarString(angUnit));
 				break;
 			case 3:
-				textField.setText(String.format("%f", this.quad.getTransParams().get(i, j) * 0.001));
+				factor = new Complex(0.001, 0.0);
+				s = (displayForm == DisplayForm.RECT) ?
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toRectString()):
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toPolarString(angUnit));
 				break;
 			case 2:
-				textField.setText(String.format("%f", this.quad.getTransParams().get(i, j)));
+				factor = new Complex(1.0, 0.0);
+				s = (displayForm == DisplayForm.RECT) ?
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toRectString()):
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toPolarString(angUnit));
 				break;
 			case 1:
-				textField.setText(String.format("%f", this.quad.getTransParams().get(i, j) * 1000.0));
+				factor = new Complex(1000.0, 0.0);
+				s = (displayForm == DisplayForm.RECT) ?
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toRectString()):
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toPolarString(angUnit));
 				break;
 			case 0:
-				textField.setText(String.format("%f", this.quad.getTransParams().get(i, j) * 1000000.0));
+				factor = new Complex(1000000.0, 0.0);
+				s = (displayForm == DisplayForm.RECT) ?
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toRectString()):
+						String.format("%s", Complex.prod(this.quad.getTransParams().get(i, j), factor).toPolarString(angUnit));
 			}
+			textField.setText(s);
 		}
 	}
 	

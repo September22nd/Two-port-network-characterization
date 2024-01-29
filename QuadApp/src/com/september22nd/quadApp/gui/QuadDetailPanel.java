@@ -1,8 +1,10 @@
 package com.september22nd.quadApp.gui;
 
+import java.awt.Dimension;
+
 import javax.swing.JTabbedPane;
 
-import com.september22nd.quadApp.quadLogic.Quad;
+import com.september22nd.quadApp.quadLogic.CQuad;
 
 public class QuadDetailPanel extends JTabbedPane {
 	
@@ -15,13 +17,14 @@ public class QuadDetailPanel extends JTabbedPane {
 	 * Create the panel.
 	 * @param quad 
 	 */
-	public QuadDetailPanel(Quad quad) {
+	public QuadDetailPanel(CQuad quad) {
 		addTab("z", null, new ZTabPanel(quad), "Open circuit (z)");
 		addTab("y", null, new YTabPanel(quad), "Short circuito (y)");
 		addTab("h", null, new HTabPanel(quad), "Hybrid (h)");
 		addTab("g", null, new GTabPanel(quad), "Inverse hybrid (g)");
 		addTab("T", null, new TTabPanel(quad), "Transmission (T)");
 		addTab("t", null, new ITTabPanel(quad), "Inverse transmission (it)");
+		this.setPreferredSize(new Dimension(490, 120));
 	}
 
 }

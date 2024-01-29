@@ -1,0 +1,21 @@
+Caracterización de cuadripolos
+
+====================================================
+
+Para introducir los parámetros, debe colocarse sobre los cuatro campos de texto que se encuentran en la parte superior izquierda de la pantalla. Con el botón "Clear Fields", se blanquearán estos espacios.
+
+Si quiere introducir un número real, escríbalo usando un punto como separador decimal (p. ej., "0.1" ó "-0.001").  También puede usar prefijos del SI para escribir números más pequeños o  más grandes. Por ejemplo, escribir "2k" es equivalente a escribir "2000". Los prefijos disponibles son "u" para "micro", "m" para mili, "k" para kilo y "M" para mega. Tener en cuenta que importan las mayús./minús.
+
+Puede utilizar dos formatos para introducir números complejos, en caso trabaje en el dominio de la frecuencia. El primero es la forma rectangular, que se escribe por ejemplo "(12.3k, 120.2m)", que sería el número complejo 12300+j0.1202. Para escribir en forma polar, use el símbolo "<" para indicar el ángulo del factor de potencia. P. ej., "12.3k<32.2" representa al número complejo con módulo 12300 y cuyo argumento es 32.2 de la unidad angular que esté seleccionada.
+
+Tener en cuenta que los prefijos SI no funcionarán para los ángulos.
+
+====================================================
+
+Para cambiar las unidades angulares, haga click sobre el desplegable ubicado en al esquina superior izquierda y seleccione la unidad que guste usar.
+
+Para cambiar el tipo de parámetro a introducir, selecciónelo usando el desplegable ubicado a la derecha del desplegable de las unidades angulares.
+
+====================================================
+
+Para ver información más detallada del cuadripolo, haga doble click en la fila correspondiente en la tabla de entradas. Puede borrar esta tabla con el botón "Dump table".

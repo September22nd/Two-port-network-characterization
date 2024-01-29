@@ -1,0 +1,21 @@
+Characterization of Two-Port Networks
+
+====================================================
+
+To input parameters, position yourself over the four text fields located at the upper left corner of the screen. The "Clear Fields" button will erase the contents of these spaces.
+
+If you want to input a real number, write it using a "." as the decimal separator (e. g., "0.1" or "-0.001"). You can also use SI prefixes to write smaller or larger numbers. For example, writing "2k" is equivalent to writing "2000". The available prefixes are "u" for micro, "m" for milli, "k" for kilo, and "M" for mega. Notice this is case-sensitive.
+
+You can use two formats to input complex numbers, in case you are working in the frequency domain. The first is the rectangular form, which is written, for example, "(12.3k, 120.2m)", representing the complex number 12300+j0.1202. To write in polar form, use the symbol "<" to indicate the power factor angle. For instance, "12.3k<32.2" represents the complex number with a magnitude of 12300 and an argument of 32.2 in the selected angular unit.
+
+Note that the SI prefixes do not work with angles.
+
+====================================================
+
+To change angular units, click on the dropdown menu located in the upper left corner and select the unit you prefer to use.
+
+To change the type of parameter to input, select it using the dropdown menu to the right of the angular units dropdown.
+
+====================================================
+
+To view more detailed information about the two-port network, double-click on the corresponding row in the input table. You can clear this table with the "Dump table" button.
