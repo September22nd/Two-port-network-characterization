@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import javax.swing.ButtonGroup;
@@ -94,34 +94,39 @@ public class HelpDialog extends JDialog {
 	}
 	
 	private void update() {
-		textArea.setText("");
-		String path = "";
-		switch(lang) {
-		case ENGLISH:
-			path = "resources/help_en.txt";
-			break;
-		case SPANISH:
-			path = "resources/help_es.txt";
-		}
-		File file = new File(path);
-		Scanner fileIn = null;
-		try {
-			fileIn = new Scanner(file);
-			while(fileIn.hasNextLine()) {
-				String line = fileIn.nextLine() + "\n";
-				textArea.append(line);
-			}
-			SwingUtilities.invokeLater(() -> {
-		        JViewport viewport = scrollPane.getViewport();
-		        Point viewPosition = viewport.getViewPosition();
-		        viewPosition.setLocation(0, 0);
-		        viewport.setViewPosition(viewPosition);
-			});
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			fileIn.close();
-		}
+	    textArea.setText("");
+	    String path = "";
+	    switch (lang) {
+	        case ENGLISH:
+	            path = "help_en.txt";
+	            break;
+	        case SPANISH:
+	            path = "help_es.txt";
+	            break;
+	    }
+	    try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path)) {
+	        if (inputStream != null) {
+	            try (Scanner fileIn = new Scanner(inputStream, "UTF-8")) {
+	                while (fileIn.hasNextLine()) {
+	                    String line = fileIn.nextLine() + "\n";
+	                    textArea.append(line);
+	                }
+	                SwingUtilities.invokeLater(() -> {
+	                    JViewport viewport = scrollPane.getViewport();
+	                    Point viewPosition = viewport.getViewPosition();
+	                    viewPosition.setLocation(0, 0);
+	                    viewport.setViewPosition(viewPosition);
+	                });
+	            }
+	        }
+	        else {
+	            System.err.println("Resource file not found: " + path);
+	        }
+	    }
+	    catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 	
 }
