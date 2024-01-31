@@ -138,6 +138,9 @@ public class Complex implements Serializable {
 		Complex c;
 		if (s.charAt(0) == '(' && s.charAt(s.length() - 1) == ')') {
 			String[] data = s.substring(1, s.length() - 1).split(",");
+			if (data.length != 2) {
+				throw new NumberFormatException();
+			}
 			double[] data1 = {suffDouble(data[0]), suffDouble(data[1])};
 			c = new Complex(data1[0], data1[1]);
 		}
