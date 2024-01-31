@@ -57,6 +57,9 @@ public class Complex implements Serializable {
 			if (Math.abs(im) <= 1.0E-14 * Math.abs(re)) {
 				im = 0.0;
 			}
+			else if (Math.abs(re) <= 1.0E-14 * Math.abs(im)) {
+				re = 0.0; //this is so fucking stupid
+			}
 		}
 	}
 
@@ -73,7 +76,7 @@ public class Complex implements Serializable {
 		}
 		return (im > 0.0) ? String.format("%f+j%f", this.re, this.im) : String.format("%f-j%f", this.re, -this.im);
 	}
-	
+
 	public String toRectString(int prec) {
 		if (im == 0.0) {
 			return String.format("%." + prec + "f", re);
