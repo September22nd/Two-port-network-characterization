@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,6 @@ import java.awt.event.ActionListener;
 import com.september22nd.quadApp.quadLogic.AngUnit;
 import com.september22nd.quadApp.quadLogic.CQuad;
 import com.september22nd.quadApp.quadLogic.DisplayForm;
-import javax.swing.JRadioButton;
 
 public abstract class AbstractParameterDetailPanel extends JPanel {
 	

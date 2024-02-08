@@ -2,6 +2,13 @@ package com.september22nd.quadApp.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.io.ObjectInputStream;
+//import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -14,6 +21,8 @@ public class MainWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -1764919469280782641L;
+	
+//	private final static String STATE_PATH = "./resources/state.txt";
 	
 	private MainPanelC mpc;
 	
@@ -87,5 +96,49 @@ public class MainWindow extends JFrame {
 		id.setModal(true);
 		id.setVisible(true);
 	}
+	
+//	@Override
+//	public void dispose() {
+//		serialize();
+//		super.dispose();
+//	}
+//	
+//	private void serialize() {
+//		File file = new File(STATE_PATH);
+//		FileOutputStream fileOut = null;
+//		ObjectOutputStream objOut = null;
+//		try {
+//			file.createNewFile();
+//			fileOut = new FileOutputStream(STATE_PATH);
+//			objOut = new ObjectOutputStream(fileOut);
+//			objOut.writeObject(this);
+//			objOut.close();
+//			fileOut.close();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	public static MainWindow deserialize() {
+//		FileInputStream fileIn = null;
+//		ObjectInputStream objIn = null;
+//		try {
+//			fileIn = new FileInputStream(STATE_PATH);
+//			objIn = new ObjectInputStream(fileIn);
+//			MainWindow mw = (MainWindow) objIn.readObject();
+//			fileIn.close();
+//			objIn.close();
+//			return mw;
+//		}
+//		catch (FileNotFoundException e) {
+//			return null;
+//		}
+//		catch (IOException | ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 	
 }
